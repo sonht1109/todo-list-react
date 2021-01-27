@@ -54,7 +54,7 @@ export default function Form(props) {
     
     const onCancel = ()=> {
         setTask((prev) => (
-            { ...prev, name: "", status: "incompleted", id: ""}
+            { ...prev, name: "", status: "incompleted", id: prev.id}
         ))
     }
 

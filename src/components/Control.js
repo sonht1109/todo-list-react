@@ -6,6 +6,10 @@ export default function Control(props) {
         props.onToggleForm()
     }
 
+    const onSort = (e)=> {
+        props.onSort(e.target.name, e.target.value)
+    }
+
     return (
         <div className="control">
             <button
@@ -14,12 +18,12 @@ export default function Control(props) {
             >
                 + Add a new task
             </button>
-            <select>
+            <select onChange={onSort} name="name">
                 <option value="0">Default (Name)</option>
                 <option value="1">A - Z</option>
                 <option value="-1">Z - A</option>
             </select>
-            <select>
+            <select onChange={onSort} name="status">
                 <option value="0">Default (Status)</option>
                 <option value="1">Completed</option>
                 <option value="-1">Incompleted</option>

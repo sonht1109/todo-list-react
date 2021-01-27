@@ -9,6 +9,10 @@ function App() {
   const [displayForm, setDisplayForm] = useState(false)
   const [editingTask, setEditingTask] = useState({})
   const [tasks, setTasks] = useState([])
+  const [sort, setSort] = useState({
+    name: 0,
+    status: 0
+  })
 
   const onSave = (task) => {
     const index = tasks.findIndex(item => item.id === task.id)
@@ -28,6 +32,13 @@ function App() {
     let tempArray = [...tasks]
     tempArray.splice(index, 1)
     setTasks([...tempArray])
+  }
+
+  const onSort = (name, value)=> {
+    setSort((prev) => ({
+      ...prev,
+      [name]: parseInt(value)
+    }))
   }
 
   return (
@@ -51,6 +62,7 @@ function App() {
             setDisplayForm(true)
             setEditingTask({})
           }}
+          onSort={onSort}
         />
         <Table
           onToggleForm={(task) => {
@@ -59,6 +71,7 @@ function App() {
           }}
           tasks={tasks}
           onDelete={onDelete}
+          sort={sort}
         />
       </div>
 
