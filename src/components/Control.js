@@ -1,10 +1,13 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../common/actions'
+import {locales} from '../common/locales'
+import { switchLocale } from '../reducers/locale'
 
 export default function Control() {
 
     const dispatch = useDispatch()
+    const locale = useSelector(state => state.locale)
 
     const onToggleForm = ()=> {
         dispatch(actions.toggleForm({
@@ -21,23 +24,38 @@ export default function Control() {
         }))
     }
 
+    const onSwitchLocale = (e)=> {
+        dispatch(switchLocale({
+            locale: e.target.value
+        }))
+    }
+
     return (
-        <div className="control">
+        <div className="control" style={{flexWrap: "wrap"}}>
             <button
             style={{backgroundColor: "#2196f3", color: "white"}}
             onClick={onToggleForm}
             >
-                + Add a new task
+                + {locale.add_task}
             </button>
             <select onChange={onSort} name="name">
-                <option value={0}>Default (Name)</option>
+                <option value={0}>{locale.default_name}</option>
                 <option value={1}>A - Z</option>
                 <option value={-1}>Z - A</option>
             </select>
             <select onChange={onSort} name="status">
-                <option value={0}>Default (Status)</option>
-                <option value={1}>Completed</option>
-                <option value={-1}>Incompleted</option>
+                <option value={0}>{locale.default_status}</option>
+                <option value={1}>{locale.completed}</option>
+                <option value={-1}>{locale.incompleted}</option>
+            </select>
+            <select onChange={onSwitchLocale}>
+                {locales.map((l, index) => {
+                    return(
+                        <option value={l.key} key={"locale" + index}>
+                            {l.language}
+                        </option>
+                    )
+                })}
             </select>
         </div>
     )

@@ -7,6 +7,7 @@ export default function Table() {
     const [keyword, setKeyword] = useState("")
     const tasks = useSelector(state => state.tasks)
     const sort = useSelector(state => state.sort)
+    const locale = useSelector(state => state.locale)
 
     const taskList = useMemo(() => {
         let tempList = [...tasks]
@@ -38,14 +39,15 @@ export default function Table() {
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>{locale.task_name}</th>
+                        <th>{locale.status}</th>
+                        <th>{locale.action}</th>
                     </tr>
                     <tr>
                         <th>
                             <input
-                                type="text" placeholder="Quick search ..."
+                                type="text"
+                                placeholder={`${locale.quick_search} ...`}
                                 style={{ width: "100%" }}
                                 value={keyword}
                                 onChange={(e) => setKeyword(e.target.value)}

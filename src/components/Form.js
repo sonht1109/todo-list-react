@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../common/actions'
 
-export default function Form(props) {
+export default function Form() {
 
     const dispatch = useDispatch()
     const {displayForm, editingTask} = useSelector(state => state.app)
+    const locale = useSelector(state => state.locale)
 
     useEffect(() => {
         if (editingTask.name && editingTask.status) {
@@ -61,7 +62,7 @@ export default function Form(props) {
                 { ...prev, name: "", status: "incompleted", id: ""}
             ))
         }
-        else alert("Name must be filled !")
+        else alert(locale.alert_fill_name)
     }
     
     const onCancel = ()=> {
@@ -76,7 +77,7 @@ export default function Form(props) {
 
                 <div style={{ display: 'flex', backgroundColor: "#2196f3", color: "white", padding: 10, alignItems: "center" }}>
                     <p style={{ marginRight: "auto" }}>
-                        {editingTask.name ? "Edit task" : "Add a new task"}
+                        {editingTask.name ? locale.edit_task : locale.add_task}
                     </p>
                     <span
                         onClick={onToggleForm}
@@ -88,7 +89,8 @@ export default function Form(props) {
                 <div style={{ padding: "10px" }}>
 
                     <input
-                        type="text" placeholder="Task name"
+                        type="text"
+                        placeholder={locale.task_name}
                         onChange={onChange}
                         name="name"
                         value={task.name}
@@ -96,12 +98,14 @@ export default function Form(props) {
                     <br />
 
                     <input
-                        type="radio" id="incompleted" name="status"
+                        type="radio"
+                        id="incompleted"
+                        name="status"
                         value="incompleted"
                         onChange={onChange}
                         checked={task.status === "incompleted"}
                     />
-                    <label htmlFor="incompleted">Incompleted</label><br />
+                    <label htmlFor="incompleted">{locale.incompleted}</label><br />
 
                     <input
                         type="radio" id="completed" name="status"
@@ -109,21 +113,21 @@ export default function Form(props) {
                         onChange={onChange}
                         checked={task.status === "completed"}
                     />
-                    <label htmlFor="completed">Completed</label><br />
+                    <label htmlFor="completed">{locale.completed}</label><br />
 
                     <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10 }}>
                         <button
                             style={{ backgroundColor: "#8bc34a", color: "white" }}
                             onClick={onSave}
                         >
-                            Save
+                            {locale.save}
                     </button>
 
                         <button
                             style={{ backgroundColor: "#9e9e9e", color: "white" }}
                             onClick={onCancel}
                         >
-                            Cancel
+                            {locale.cancel}
                     </button>
                     </div>
                 </div>
