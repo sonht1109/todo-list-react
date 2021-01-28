@@ -1,0 +1,16 @@
+{
+    "app.add_task": "Add a new task",
+    "app.edit_task": "Edit",
+    "app.task_name": "Task name",
+    "app.incompleted": "Incompleted",
+    "app.completed": "Completed",
+    "app.save": "Save",
+    "app.cancel": "Cancel",
+    "app.default_name": "Default (Name)",
+    "app.default_status": "Default (Status)",
+    "app.status": "Status",
+    "app.quick_search": "Quick search",
+    "app.action": "Action",
+    "app.delete_task": "Delete",
+    "app.alert_fill_name": "Name must be filled !"
+}

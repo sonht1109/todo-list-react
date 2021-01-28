@@ -1,13 +1,14 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { FormattedMessage } from 'react-intl'
+import { useDispatch } from 'react-redux'
 import * as actions from '../common/actions'
 import {locales} from '../common/locales'
 import { switchLocale } from '../reducers/locale'
+import translateMessages from '../common/translateMessage';
 
 export default function Control() {
 
     const dispatch = useDispatch()
-    const locale = useSelector(state => state.locale)
 
     const onToggleForm = ()=> {
         dispatch(actions.toggleForm({
@@ -36,17 +37,25 @@ export default function Control() {
             style={{backgroundColor: "#2196f3", color: "white"}}
             onClick={onToggleForm}
             >
-                + {locale.add_task}
+                + <FormattedMessage {...translateMessages.addTask} />
             </button>
             <select onChange={onSort} name="name">
-                <option value={0}>{locale.default_name}</option>
+                <FormattedMessage id="app.default_name">
+                    {message => <option value={0}>{message}</option>}
+                </FormattedMessage>
                 <option value={1}>A - Z</option>
                 <option value={-1}>Z - A</option>
             </select>
             <select onChange={onSort} name="status">
-                <option value={0}>{locale.default_status}</option>
-                <option value={1}>{locale.completed}</option>
-                <option value={-1}>{locale.incompleted}</option>
+                <FormattedMessage id="app.default_status">
+                    {mess => <option value={0}>{mess}</option>}
+                </FormattedMessage>
+                <FormattedMessage id="app.completed">
+                    {mess => <option value={1}>{mess}</option>}
+                </FormattedMessage>
+                <FormattedMessage id="app.incompleted">
+                    {mess => <option value={-1}>{mess}</option>}
+                </FormattedMessage>
             </select>
             <select onChange={onSwitchLocale}>
                 {locales.map((l, index) => {

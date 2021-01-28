@@ -1,0 +1,16 @@
+{
+    "app.add_task": "Thêm NV mới",
+    "app.edit_task": "Chỉnh sửa",
+    "app.task_name": "Tên NV",
+    "app.incompleted": "Chưa hoàn thành",
+    "app.completed": "Đã hoàn thành",
+    "app.save": "Lưu",
+    "app.cancel": "Hủy",
+    "app.default_name": "Mặc đinh (Tên)",
+    "app.default_status": "Mặc đinh (Trạng thái)",
+    "app.status": "Trạng thái",
+    "app.quick_search": "Tìm kiếm nhanh",
+    "app.action": "Hành động",
+    "app.delete_task": "Xóa",
+    "app.alert_fill_name": "Tên không được bỏ trống !"
+}

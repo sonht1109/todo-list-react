@@ -1,20 +1,12 @@
-import en from '../locales/en.json'
-import vi from '../locales/vi.json'
-
-const locales = {
-    en, vi
-}
-
-var initState = {...locales['en']}
+var initState = 'en'
 
 const localeReducer = (state = initState, action) => {
     switch (action.type) {
         case "SWITCH_LOCALE_ACT":
-            const {locale} = action.payload
-            return {...locales[locale]}
+            return action.payload.locale
     
         default:
-            return {...state};
+            return state;
     }
 }
 
