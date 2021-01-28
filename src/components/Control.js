@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import * as actions from '../common/actions'
 
-export default function Control(props) {
+export default function Control() {
 
     const dispatch = useDispatch()
 
@@ -14,7 +14,11 @@ export default function Control(props) {
     }
 
     const onSort = (e)=> {
-        props.onSort(e.target.name, e.target.value)
+        let name = e.target.name
+        let value = e.target.value
+        dispatch(actions.sort({
+            [name]: value
+        }))
     }
 
     return (
@@ -26,14 +30,14 @@ export default function Control(props) {
                 + Add a new task
             </button>
             <select onChange={onSort} name="name">
-                <option value="0">Default (Name)</option>
-                <option value="1">A - Z</option>
-                <option value="-1">Z - A</option>
+                <option value={0}>Default (Name)</option>
+                <option value={1}>A - Z</option>
+                <option value={-1}>Z - A</option>
             </select>
             <select onChange={onSort} name="status">
-                <option value="0">Default (Status)</option>
-                <option value="1">Completed</option>
-                <option value="-1">Incompleted</option>
+                <option value={0}>Default (Status)</option>
+                <option value={1}>Completed</option>
+                <option value={-1}>Incompleted</option>
             </select>
         </div>
     )

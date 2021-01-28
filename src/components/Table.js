@@ -1,10 +1,12 @@
 import React, { useMemo, useState } from 'react'
+import { useSelector } from 'react-redux';
 import TableElement from './TableElement';
 
-export default function Table(props) {
+export default function Table() {
 
     const [keyword, setKeyword] = useState("")
-    const { tasks, sort } = props
+    const tasks = useSelector(state => state.tasks)
+    const sort = useSelector(state => state.sort)
 
     const taskList = useMemo(() => {
         let tempList = [...tasks]
@@ -26,10 +28,8 @@ export default function Table(props) {
 
     const mapTasks = searchList.map((task, index) => {
         return <TableElement
-            onToggleForm={props.onToggleForm}
             task={task}
             key={"task" + index}
-            onDelete={props.onDelete}
         />
     })
 

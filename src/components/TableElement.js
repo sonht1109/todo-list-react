@@ -14,7 +14,7 @@ export default function TableElement(props) {
     }
 
     const onDelete = ()=> {
-        props.onDelete(props.task)
+        dispatch(actions.deleteTask(props.task.id))
     }
 
     return (

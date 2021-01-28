@@ -52,8 +52,11 @@ export default function Form(props) {
             if(task.id === ""){
                 task.id = Date.now().toString()
             }
-            // props.onSave(task)
             dispatch(actions.saveTask(task))
+            dispatch(actions.toggleForm({
+                editingTask: {},
+                displayForm: false
+            }))
             setTask((prev) => (
                 { ...prev, name: "", status: "incompleted", id: ""}
             ))
