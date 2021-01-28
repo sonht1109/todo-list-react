@@ -1,9 +1,16 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import * as actions from '../common/actions'
 
 export default function TableElement(props) {
 
+    const dispatch = useDispatch()
+
     const onToggleForm = ()=> {
-        props.onToggleForm(props.task)
+        dispatch(actions.toggleForm({
+            editingTask: props.task,
+            displayForm: true
+        }))
     }
 
     const onDelete = ()=> {

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../common/actions'
 
 export default function Form(props) {
 
+    const dispatch = useDispatch()
+    const {displayForm, editingTask} = useSelector(state => state.app)
+
     useEffect(() => {
-        if (props.editingTask.name && props.editingTask.status) {
-            const { name, status, id } = props.editingTask
+        if (editingTask.name && editingTask.status) {
+            const { name, status, id } = editingTask
             setTask((prev) => ({
                 ...prev,
                 name, status, id
@@ -18,7 +23,7 @@ export default function Form(props) {
                 id: ""
             }))
         }
-    }, [props.editingTask])
+    }, [editingTask])
 
     const [task, setTask] = useState({
         name: "",
@@ -26,8 +31,11 @@ export default function Form(props) {
         id: ""
     })
 
-    const onToggleForm = (task) => {
-        props.onToggleForm(task)
+    const onToggleForm = () => {
+        dispatch(actions.toggleForm({
+            editingTask: {},
+            displayForm: false
+        }))
     }
 
     const onChange = (e) => {
@@ -44,7 +52,8 @@ export default function Form(props) {
             if(task.id === ""){
                 task.id = Date.now().toString()
             }
-            props.onSave(task)
+            // props.onSave(task)
+            dispatch(actions.saveTask(task))
             setTask((prev) => (
                 { ...prev, name: "", status: "incompleted", id: ""}
             ))
@@ -60,11 +69,11 @@ export default function Form(props) {
 
     return (
         <div>
-            <div className={`form ${props.displayForm ? 'active' : ''}`}>
+            <div className={`form ${displayForm ? 'active' : ''}`}>
 
                 <div style={{ display: 'flex', backgroundColor: "#2196f3", color: "white", padding: 10, alignItems: "center" }}>
                     <p style={{ marginRight: "auto" }}>
-                        {props.editingTask.name ? "Edit task" : "Add a new task"}
+                        {editingTask.name ? "Edit task" : "Add a new task"}
                     </p>
                     <span
                         onClick={onToggleForm}

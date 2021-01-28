@@ -3,6 +3,7 @@ import Control from './components/Control';
 import Table from './components/Table';
 import Form from './components/Form';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
 
@@ -14,18 +15,21 @@ function App() {
     status: 0
   })
 
-  const onSave = (task) => {
-    const index = tasks.findIndex(item => item.id === task.id)
-    if (index !== -1) {
-      setTasks((prev) => {
-        prev[index] = { ...task }
-        return [...prev]
-      })
-    }
-    else {
-      setTasks((prev) => [...prev, task])
-    }
-  }
+  // const dispatch = useDispatch()
+  // const app = useSelector(state => state.app)
+
+  // const onSave = (task) => {
+  //   const index = tasks.findIndex(item => item.id === task.id)
+  //   if (index !== -1) {
+  //     setTasks((prev) => {
+  //       prev[index] = { ...task }
+  //       return [...prev]
+  //     })
+  //   }
+  //   else {
+  //     setTasks((prev) => [...prev, task])
+  //   }
+  // }
 
   const onDelete = (task) => {
     const index = tasks.findIndex(item => item.id === task.id)
@@ -44,31 +48,31 @@ function App() {
   return (
     <div className="App">
       <Form
-        displayForm={displayForm}
-        onToggleForm={() => {
-          setDisplayForm(false)
-          setEditingTask({})
-        }}
-        editingTask={editingTask}
-        onSave={(task) => {
-          onSave(task)
-          setDisplayForm(false)
-        }}
+        // displayForm={displayForm}
+        // onToggleForm={() => {
+        //   setDisplayForm(false)
+        //   setEditingTask({})
+        // }}
+        // editingTask={editingTask}
+        // onSave={(task) => {
+        //   onSave(task)
+        //   setDisplayForm(false)
+        // }}
       />
 
       <div style={{ width: '100%' }}>
         <Control
-          onToggleForm={() => {
-            setDisplayForm(true)
-            setEditingTask({})
-          }}
+          // onToggleForm={() => {
+          //   setDisplayForm(true)
+          //   setEditingTask({})
+          // }}
           onSort={onSort}
         />
         <Table
-          onToggleForm={(task) => {
-            setDisplayForm(true)
-            setEditingTask(task)
-          }}
+          // onToggleForm={(task) => {
+          //   setDisplayForm(true)
+          //   setEditingTask(task)
+          // }}
           tasks={tasks}
           onDelete={onDelete}
           sort={sort}

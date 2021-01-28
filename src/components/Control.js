@@ -1,9 +1,16 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import * as actions from '../common/actions'
 
 export default function Control(props) {
 
+    const dispatch = useDispatch()
+
     const onToggleForm = ()=> {
-        props.onToggleForm()
+        dispatch(actions.toggleForm({
+            editingTask: {},
+            displayForm: true
+        }))
     }
 
     const onSort = (e)=> {
